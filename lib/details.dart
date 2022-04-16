@@ -17,6 +17,7 @@ class _DetailsScreensState extends State<DetailsScreens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 126, 200, 234),
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -29,6 +30,7 @@ class _DetailsScreensState extends State<DetailsScreens> {
         title: const Text(
           'Details',
           style: TextStyle(
+            color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -36,8 +38,8 @@ class _DetailsScreensState extends State<DetailsScreens> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.blue,
-                Colors.black,
+                Color.fromARGB(255, 52, 179, 238),
+                Color.fromARGB(255, 231, 133, 195),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -53,17 +55,13 @@ class _DetailsScreensState extends State<DetailsScreens> {
           children: [
             Card(
               elevation: 10,
-              color: const Color.fromARGB(
-                255,
-                9,
-                184,
-                163,
-              ),
+              color: const Color.fromARGB(255, 245, 214, 245),
               child: Column(
                 children: [
                   ListTile(
                     leading: const Icon(
                       Icons.arrow_circle_right,
+                      color: Colors.black,
                     ),
                     title: Text(
                       widget.task.title,
@@ -94,12 +92,7 @@ class _DetailsScreensState extends State<DetailsScreens> {
                         width: 2,
                         color: Colors.black,
                       ),
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        118,
-                        174,
-                        219,
-                      ),
+                      backgroundColor: Color.fromARGB(255, 174, 165, 234),
                       label: Text(
                         'Completed',
                       ),

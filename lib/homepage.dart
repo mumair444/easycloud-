@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 95, 178, 214),
+      backgroundColor: const Color.fromARGB(255, 126, 200, 234),
       key: _key,
       drawerEnableOpenDragGesture: false,
       drawer: HomepageDrawer(selectedFilter: getStatus),
@@ -103,10 +103,14 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             _key.currentState!.openDrawer();
           },
-          icon: const Icon(Icons.filter_list),
+          icon: const Icon(
+            Icons.filter_list,
+            color: Colors.black,
+          ),
         ),
         title: const Text(
-          'TODO List',
+          'Interns Training Tasks',
+          style: TextStyle(color: Colors.black, fontSize: 18),
         ),
         actions: [
           IconButton(
@@ -122,6 +126,7 @@ class _HomePageState extends State<HomePage> {
             },
             icon: const Icon(
               Icons.logout,
+              color: Colors.black,
             ),
           ),
         ],
@@ -129,8 +134,8 @@ class _HomePageState extends State<HomePage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.blue,
-                Colors.black,
+                Color.fromARGB(255, 52, 179, 238),
+                Color.fromARGB(255, 231, 133, 195),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -138,18 +143,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.person),
+      //     ),
+      //   ],
+      // ),
       body: HomePageData(
         list: status == ''
             ? mylist
             : mylist.where((element) => element.status == status).toList(),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(
-          255,
-          118,
-          174,
-          219,
-        ),
+        backgroundColor: const Color.fromARGB(255, 174, 165, 234),
         onPressed: () {
           Navigator.push(
             context,

@@ -28,114 +28,111 @@ class _HomePageDataState extends State<HomePageData> {
   @override
   Widget build(BuildContext context) {
     List<Tasks> tasks = widget.list;
-    return ListView.separated(
-      itemBuilder: (
-        context,
-        index,
-      ) {
-        return Card(
-          elevation: 10,
-          color: const Color.fromARGB(
-            255,
-            9,
-            184,
-            163,
-          ),
-          child: Column(
-            children: [
-              ListTile(
-                leading: const Icon(
-                  Icons.arrow_circle_right,
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      tasks[index].title,
-                    ),
-                    Text(
-                      tasks[index].status == 'Completed' ||
-                              tasks[index].status == 'Pending'
-                          ? tasks[index].status
-                          : tasks[index].title == taskId
-                              ? res
-                              : 'Incomplete',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                trailing: IconButton(
-                  onPressed: () {
-                    Fluttertoast.showToast(
-                        msg: 'Deleted ${tasks[index].title}',
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        backgroundColor: Colors.grey,
-                        textColor: Colors.black,
-                        fontSize: 16.0);
-                    setState(() {
-                      tasks.removeWhere(
-                          (element) => element.title == tasks[index].title);
-                    });
-                  },
-                  icon: const Icon(Icons.delete),
-                  tooltip: 'Delete',
-                ),
-                subtitle: Text(
-                  tasks[index].description,
-                  style: const TextStyle(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView.separated(
+        itemBuilder: (
+          context,
+          index,
+        ) {
+          return Card(
+            elevation: 10,
+            color: const Color.fromARGB(255, 245, 214, 245),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: const Icon(
+                    Icons.arrow_circle_right,
                     color: Colors.black,
                   ),
-                ),
-              ),
-              TextButton(
-                style: ButtonStyle(
-                  side: MaterialStateProperty.all(
-                    const BorderSide(
-                      width: 1,
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        tasks[index].title,
+                      ),
+                      Text(
+                        tasks[index].status == 'Completed' ||
+                                tasks[index].status == 'Pending'
+                            ? tasks[index].status
+                            : tasks[index].title == taskId
+                                ? res
+                                : 'Incomplete',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  // trailing: IconButton(
+                  //   onPressed: () {
+                  //     Fluttertoast.showToast(
+                  //         msg: 'Deleted ${tasks[index].title}',
+                  //         toastLength: Toast.LENGTH_SHORT,
+                  //         gravity: ToastGravity.CENTER,
+                  //         backgroundColor: Colors.black,
+                  //         textColor: Colors.white,
+                  //         fontSize: 16.0);
+                  //     setState(() {
+                  //       tasks.removeWhere(
+                  //           (element) => element.title == tasks[index].title);
+                  //     });
+                  //   },
+                  //   icon: const Icon(
+                  //     Icons.delete,
+                  //     color: Colors.black,
+                  //   ),
+                  //   tooltip: 'Delete',
+                  // ),
+                  subtitle: Text(
+                    tasks[index].description,
+                    style: const TextStyle(
                       color: Colors.black,
                     ),
                   ),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color.fromARGB(
-                      255,
-                      118,
-                      174,
-                      219,
-                    ),
-                  ),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailsScreens(
-                        task: tasks[index],
-                        callBackFunc: callBackFunc,
+                TextButton(
+                  style: ButtonStyle(
+                    side: MaterialStateProperty.all(
+                      const BorderSide(
+                        width: 1,
+                        color: Colors.black,
                       ),
                     ),
-                  );
-                },
-                child: const Text(
-                  'Details',
-                  style: TextStyle(
-                    color: Colors.black,
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.black,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsScreens(
+                          task: tasks[index],
+                          callBackFunc: callBackFunc,
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Details',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-            ],
-            mainAxisSize: MainAxisSize.min,
-          ),
-        );
-      },
-      separatorBuilder: (
-        context,
-        int,
-      ) =>
-          const SizedBox(
-        height: 4,
+              ],
+              mainAxisSize: MainAxisSize.min,
+            ),
+          );
+        },
+        separatorBuilder: (
+          context,
+          int,
+        ) =>
+            const SizedBox(
+          height: 4,
+        ),
+        itemCount: tasks.length,
       ),
-      itemCount: tasks.length,
     );
   }
 }

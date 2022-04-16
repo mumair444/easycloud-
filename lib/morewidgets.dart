@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:using_widgets/homepage.drawer.dart';
 import 'package:using_widgets/status_dropdown.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -16,7 +15,6 @@ class _MoreWidgetsState extends State<MoreWidgets> {
   myFunc(result) {
     setState(() {
       widget.selectedValue = result;
-      print(widget.selectedValue);
     });
   }
 
@@ -25,6 +23,7 @@ class _MoreWidgetsState extends State<MoreWidgets> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 126, 200, 234),
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -43,7 +42,10 @@ class _MoreWidgetsState extends State<MoreWidgets> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.blue, Colors.black],
+              colors: [
+                Color.fromARGB(255, 52, 179, 238),
+                Color.fromARGB(255, 231, 133, 195),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -68,14 +70,14 @@ class _MoreWidgetsState extends State<MoreWidgets> {
                     color: Colors.black,
                   ),
                 ),
-                fillColor: Colors.grey,
+                fillColor: const Color.fromARGB(255, 245, 214, 245),
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                     30,
                   ),
                 ),
-                hintText: 'Title of your task',
+                hintText: ' Title of your task',
               ),
             ),
             const SizedBox(
@@ -90,14 +92,14 @@ class _MoreWidgetsState extends State<MoreWidgets> {
                     color: Colors.black,
                   ),
                 ),
-                fillColor: Colors.grey,
+                fillColor: const Color.fromARGB(255, 245, 214, 245),
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                     30,
                   ),
                 ),
-                hintText: 'Description of your task',
+                hintText: ' Description of your task',
               ),
             ),
             const SizedBox(
@@ -112,7 +114,6 @@ class _MoreWidgetsState extends State<MoreWidgets> {
             ),
             ElevatedButton(
               onPressed: () {
-                print(widget.selectedValue);
                 if (title.text.isEmpty) {
                   Fluttertoast.showToast(
                       msg: 'Please add your title',
@@ -161,15 +162,16 @@ class _MoreWidgetsState extends State<MoreWidgets> {
                   ),
                 ),
                 backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromARGB(
-                    255,
-                    118,
-                    174,
-                    219,
-                  ),
+                  const Color.fromARGB(255, 174, 165, 234),
                 ),
               ),
             ),
+            // Center(
+            //   child: Image.asset(
+            //     'lib/assets/easycloudlogo.png',
+            //     height: 300,
+            //   ),
+            // ),
           ],
         ),
       ),

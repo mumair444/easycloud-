@@ -10,9 +10,8 @@ class HomepageDrawer extends StatefulWidget {
   State<HomepageDrawer> createState() => _HomepageDrawerState();
 }
 
-String? selectedValue;
-
 class _HomepageDrawerState extends State<HomepageDrawer> {
+  String? selectedValue;
   myFunc(result) {
     setState(() {
       selectedValue = result;
@@ -22,16 +21,18 @@ class _HomepageDrawerState extends State<HomepageDrawer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 126, 200, 234),
       appBar: AppBar(
         title: const Text(
           'FILTERS',
+          style: TextStyle(color: Colors.black),
         ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.blue,
-                Colors.black,
+                Color.fromARGB(255, 52, 179, 238),
+                Color.fromARGB(255, 231, 133, 195),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -60,14 +61,7 @@ class _HomepageDrawerState extends State<HomepageDrawer> {
                     color: Colors.black,
                   ),
                 ),
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromARGB(
-                    255,
-                    118,
-                    174,
-                    219,
-                  ),
-                ),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
               ),
               onPressed: () {
                 widget.selectedFilter(selectedValue);
@@ -76,10 +70,12 @@ class _HomepageDrawerState extends State<HomepageDrawer> {
               child: const Text(
                 'Apply',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ),
+
+            
           ],
         ),
       ),

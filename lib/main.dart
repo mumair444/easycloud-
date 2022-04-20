@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:using_widgets/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+import 'package:using_widgets/newaccount.dart';
 
 void main() {
   runApp(
@@ -43,12 +45,64 @@ class _UmairState extends State<Umair> {
     }
   }
 
+  Future<void> login() async {
+    if (username.text.isNotEmpty && password.text.isNotEmpty) {
+      var response = await http.post(Uri.parse('https://reqres.in/api/login'),
+          body: ({'email': username.text, 'password': password.text}));
+      if (response.statusCode == 200) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString("isLoggedIn", true.toString());
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+      } else {
+        Fluttertoast.showToast(
+            msg: 'Please enter valid email and password',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.transparent,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    } else {
+      if (username.text.isEmpty && password.text.isEmpty) {
+        Fluttertoast.showToast(
+            msg: 'Please enter your credentials',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.transparent,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else if (username.text.isEmpty) {
+        Fluttertoast.showToast(
+            msg: 'Please add your username',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.transparent,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else if (password.text.isEmpty) {
+        Fluttertoast.showToast(
+            msg: 'Please add your password',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.transparent,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 231, 133, 195),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -123,61 +177,8 @@ class _UmairState extends State<Umair> {
               ),
 
               ElevatedButton(
-                onPressed: () async {
-                  if (username.text.isEmpty) {
-                    Fluttertoast.showToast(
-                        msg: 'Please add your username',
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        backgroundColor: Colors.transparent,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                  }
-                  if (password.text.isEmpty) {
-                    Fluttertoast.showToast(
-                        msg: 'Please add your password',
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        backgroundColor: Colors.transparent,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                  }
-                  if (username.text.isEmpty && password.text.isEmpty) {
-                    Fluttertoast.showToast(
-                        msg: 'Please enter your credentials',
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        backgroundColor: Colors.transparent,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                  } else {
-                    if (username.text == 'umair' && password.text == 'umair') {
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      await prefs.setString("isLoggedIn", true.toString());
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ),
-                      );
-                    } else if (username.text.isNotEmpty &&
-                        password.text.isNotEmpty) {
-                      Fluttertoast.showToast(
-                          msg: 'Please enter a valid email and password',
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.transparent,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-
-                      // ScaffoldMessenger.of(context).showSnackBar(
-                      //   const SnackBar(
-                      //     content: Text('Please enter a valid email and password'),
-                      //   ),
-                      // );
-                    }
-                  }
+                onPressed: () {
+                  login();
                 },
                 child: const Text(
                   'Sign In',
@@ -214,7 +215,14 @@ class _UmairState extends State<Umair> {
                 height: 60,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NewAccount(),
+                    ),
+                  );
+                },
                 child: const Text(
                   "Don't have an account? Sign Up",
                   style: TextStyle(
